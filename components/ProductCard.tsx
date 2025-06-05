@@ -2,7 +2,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Product } from "@/types/product";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 

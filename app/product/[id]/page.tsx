@@ -4,7 +4,7 @@ import { use } from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getProduct, deleteProduct } from "@/lib/api";
-import { Product } from "@/types/product";
+import { Product } from "@/types/Product";
 import Image from "next/image";
 
 export default function ProductDetailPage(props: { params: Promise<{ id: string }> }) {

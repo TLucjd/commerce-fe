@@ -4,12 +4,11 @@ import { use } from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getProduct, updateProduct } from "@/lib/api";
-import { Product } from "@/types/product";
+import Image from "next/image";
 
 export default function EditProductPage(props: { params: Promise<{ id: string }> }) {
   const { id } = use(props.params); // ✅ unwrap Promise
   const router = useRouter();
-  const [product, setProduct] = useState<Product | null>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [form, setForm] = useState({ name: "", price: "", image: "", description: "" });
   const [imagePreview, setImagePreview] = useState<string>("");
@@ -19,7 +18,6 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
     const fetch = async () => {
       try {
         const data = await getProduct(id);
-        setProduct(data);
         setForm({
           name: data.name || "",
           price: data.price?.toString() || "",
@@ -27,7 +25,9 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
           description: data.description || "",
         });
         setImagePreview(data.image || "");
-      } catch (err) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_err) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         router.replace("/not-found");
       } finally {
         setLoading(false);
@@ -135,9 +135,10 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
             className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
           />
           {imagePreview && (
-            <img
+            <Image
               src={imagePreview}
               alt="Preview"
+              fill
               className="mt-4 h-56 w-full object-cover rounded-xl border shadow"
             />
           )}

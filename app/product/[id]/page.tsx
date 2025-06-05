@@ -18,7 +18,8 @@ export default function ProductDetailPage(props: { params: Promise<{ id: string 
       try {
         const data = await getProduct(id);
         setProduct(data);
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      } catch (_error) {
         router.replace("/not-found");
       } finally {
         setLoading(false);

@@ -3,13 +3,7 @@ import { getProducts } from "@/lib/api";
 import ProductCard from "@/components/ProductCard";
 
 export default async function HomePage() {
-  const fetchProducts = async () => { 
-    const products = await getProducts();
-    // convert to json
-    return products;
-  }
-
-  const products = await fetchProducts();
+  const products = await getProducts();
 
   return (
     <div>

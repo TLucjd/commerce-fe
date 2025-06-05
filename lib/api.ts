@@ -1,11 +1,10 @@
 import { Product } from "@/types/product";
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getProducts(): Promise<Product[]> {
   const res = await fetch(`${BASE_URL}/products`, { cache: 'no-store' });
-  console.log(123123,res.json());
-return res.json();
+  return res.json();
 }
 
 export async function getProduct(id: string): Promise<Product> {
@@ -37,14 +36,15 @@ export async function createProduct(product: Partial<Product>, imageFile?: File)
   return res.json();
 }
 
-export async function updateProduct(id: string, product: Partial<Product>) {
+export const updateProduct = async (id: string, formData: FormData) => {
   const res = await fetch(`${BASE_URL}/products/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product),
+    body: formData,
   });
+  if (!res.ok) throw new Error("Failed to update");
   return res.json();
-}
+};
+
 
 export async function deleteProduct(id: string) {
   const res = await fetch(`${BASE_URL}/products/${id}`, {

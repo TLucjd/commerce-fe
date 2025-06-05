@@ -10,6 +10,7 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
   const { id } = use(props.params); // ✅ unwrap Promise
   const router = useRouter();
   const [product, setProduct] = useState<Product | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [form, setForm] = useState({ name: "", price: "", image: "", description: "" });
   const [imagePreview, setImagePreview] = useState<string>("");
   const [loading, setLoading] = useState(true);
@@ -41,34 +42,42 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64 = reader.result as string;
-        setImagePreview(base64);
-        setForm((prev) => ({ ...prev, image: base64 }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const file = e.target.files?.[0];
+  if (file) {
+    setImageFile(file); 
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result as string;
+      setImagePreview(base64); 
+    };
+    reader.readAsDataURL(file);
+  }
+};
 
   const handleSubmit = async (e: React.FormEvent) => {
-    console.log("Submitting image:", form.image);
   e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("name", form.name);
+  formData.append("price", form.price);
+  formData.append("description", form.description);
+
+  // Nếu bạn có file ảnh mới, append nó
+  if (imageFile) {
+    formData.append("image", imageFile);
+  }
+
   try {
-    await updateProduct(id, {
-      name: form.name,
-      price: parseFloat(form.price),
-      image: form.image,
-      description: form.description,
-    });
+    await updateProduct(id, formData);
     alert("✅ Product updated successfully!");
     router.push(`/product/${id}`);
   } catch (error) {
     alert("❌ Failed to update product.");
+    console.error(error);
   }
 };
+
 
 
   if (loading) return <div className="p-10 text-center text-gray-600">Loading...</div>;

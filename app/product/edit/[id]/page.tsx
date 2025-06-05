@@ -27,7 +27,6 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
         setImagePreview(data.image || "");
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (_err) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         router.replace("/not-found");
       } finally {
         setLoading(false);

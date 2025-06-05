@@ -1,4 +1,4 @@
-import { Product } from "@/types/Product";
+import { Product } from "@/types/product";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 

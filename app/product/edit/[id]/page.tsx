@@ -134,12 +134,14 @@ export default function EditProductPage(props: { params: Promise<{ id: string }>
             className="file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-blue-600 file:text-white hover:file:bg-blue-700"
           />
           {imagePreview && (
-            <Image
-              src={imagePreview}
-              alt="Preview"
-              fill
-              className="mt-4 h-56 w-full object-cover rounded-xl border shadow"
-            />
+            <div className="relative mt-4 h-56 w-full rounded-xl border shadow">
+              <Image
+                src={imagePreview}
+                alt="Preview"
+                fill
+                className="object-cover rounded-xl"
+              />
+            </div>
           )}
         </div>
 

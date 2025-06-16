@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { logout } from "@/lib/auth";
 import { useRouter } from "next/navigation";
@@ -22,10 +22,10 @@ export default function Navbar() {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   const router = useRouter();
 
-  useEffect(() => {
+useEffect(() => {
   const token = Cookies.get("access_token");
   setIsLoggedIn(!!token);
-}, []);
+}, [setIsLoggedIn]);
 
   const handleLogout = async () => {
     await logout();

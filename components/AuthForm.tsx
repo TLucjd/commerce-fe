@@ -44,8 +44,8 @@ export default function AuthForm({ type }: AuthFormProps) {
         setIsLoggedIn(true);
         router.push("/");
       }
-    } catch (err: any) {
-      const msg = err.response?.data?.message || "Something went wrong.";
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Something went wrong.";
       toast.error(msg);
     } finally {
       setLoading(false);

@@ -3,7 +3,7 @@
 import { use } from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getProduct, updateProduct } from "@/lib/api";
+import { getProduct, updateProduct } from "@/lib/product";
 import Image from "next/image";
 
 export default function EditProductPage(props: { params: Promise<{ id: string }> }) {

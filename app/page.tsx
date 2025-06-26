@@ -1,5 +1,5 @@
 // pages/index.tsx (Homepage - List Products)
-import { getProducts } from "@/lib/api";
+import { getProducts } from "@/lib/product";
 import ProductCard from "@/components/ProductCard";
 
 export default async function HomePage() {

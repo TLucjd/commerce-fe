@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { createProduct } from "@/lib/api";
+import { createProduct } from "@/lib/product";
 import { Upload } from "lucide-react"; // Cài: npm i lucide-react
 
 export default function CreateProductPage() {

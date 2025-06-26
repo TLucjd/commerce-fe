@@ -5,6 +5,7 @@ import { getProducts } from '@/lib/product'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Product = {
   id: string
@@ -49,9 +50,11 @@ export default function ShopPage() {
             >
               <Link href={`/product/${product.id}`}>
                 <div className="overflow-hidden">
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={400}
+                    height={224}
                     className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>

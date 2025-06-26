@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth-store'
 import { toast } from 'sonner'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge'
+import Image from 'next/image'
 
 type Order = {
   id: string
@@ -53,7 +54,7 @@ export default function OrdersPage() {
       <h1 className="text-3xl font-bold mb-8 text-center">Your Orders</h1>
 
       {orders.length === 0 ? (
-        <p className="text-center text-gray-500">You haven’t placed any orders yet.</p>
+        <p className="text-center text-gray-500">You haven&#39;t placed any orders yet.</p>
       ) : (
         <div className="space-y-8">
           {orders.map((order) => (
@@ -79,9 +80,11 @@ export default function OrdersPage() {
                 {order.items.map((item) => (
                   <li key={item.id} className="py-4 flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <img
+                      <Image
                         src={item.product.image}
                         alt={item.product.name}
+                        width={64}
+                        height={64}
                         className="w-16 h-16 object-cover rounded-md border"
                       />
                       <div>

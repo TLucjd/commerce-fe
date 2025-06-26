@@ -32,7 +32,7 @@ export default function CheckoutPage() {
       clearCart()
       toast.success('Order placed successfully!')
       router.push('/orders')
-    } catch (err) {
+    } catch {
       toast.error('Failed to place order.')
     } finally {
       setLoading(false)

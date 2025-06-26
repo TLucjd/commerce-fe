@@ -31,7 +31,7 @@ export default function ProductDetailPage() {
       try {
         const data = await getProduct(id as string)
         setProduct(data)
-      } catch (err) {
+      } catch {
         toast.error('Failed to load product')
       } finally {
         setLoading(false)
